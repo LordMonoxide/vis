@@ -1,11 +1,5 @@
 package vis;
 
-import java.awt.Frame;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.SwingUtilities;
-
 import vis.components.constructs.ConsoleOutput;
 import vis.components.constructs.For;
 import vis.components.io.OutputBinding;
@@ -13,7 +7,9 @@ import vis.components.io.SimpleBinding;
 import vis.components.operants.Mod;
 import vis.components.operants.Xor;
 import vis.components.sources.TextSource;
-import vis.gui.GraphRenderer;
+import vis.gui.Context;
+import vis.gui.Dispatch;
+import vis.gui.Window;
 
 public class Vis {
   public static void main(String[] args) {
@@ -41,25 +37,13 @@ public class Vis {
     
     f.trigger();*/
     
-    SwingUtilities.invokeLater(() -> {
-      new Vis();
-    });
+    new Vis();
   }
   
-  private final Frame _window;
-  
   public Vis() {
-    _window = new Frame("Vis");
-    _window.setSize(1280, 720);
-    _window.setVisible(true);
-    _window.addWindowListener(new WindowAdapter() {
-      @Override
-      public void windowClosing(WindowEvent e) {
-        _window.dispose();
-        super.windowClosing(e);
-      }
-    });
+    Window window = new Window();
+    Context ctx = Context.fromWindow(window);
     
-    _window.add(new GraphRenderer());
+    Dispatch.join();
   }
 }
