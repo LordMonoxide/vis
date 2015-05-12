@@ -1,5 +1,7 @@
 package vis.components.operants;
 
-public abstract class Operant {
+import vis.components.Component;
+
+public abstract class Operant implements Component {
 
 }
